@@ -1,0 +1,10 @@
+{
+	"C_Cpp.errorSquiggles": "disabled",
+	"files.associations": {
+		"so_long.h": "c",
+		"libft.h": "c"
+	},
+	"[c]": {
+        "editor.defaultFormatter": "keyhr.42-c-format"
+    }
+}
