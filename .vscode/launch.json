@@ -1,7 +1,4 @@
 {
-	// Use IntelliSense to learn about possible attributes.
-	// Hover to view descriptions of existing attributes.
-	// For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations":
     [
@@ -9,8 +6,8 @@
             "name": "GDB Debugging",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/so_long/libft/get_next_line/a.out",
-            "args": ["${workspaceFolder}/so_long/libft/get_next_line/file.txt"],
+            "program": "${workspaceFolder}/philo",
+            "args": ["10", "300", "100", "100", "10"],
             "stopAtEntry": true,
             "cwd": "${workspaceFolder}",
             "environment": [],

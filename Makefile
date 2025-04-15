@@ -8,7 +8,7 @@ OBJ_DIR = obj
 
 SRCS = error_message.c clean_up.c \
        input_checks.c lst_functions.c main.c parsing.c \
-       tasks.c utils.c
+       tasks.c utils.c single_philo_life.c
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 HEADERS = philo.h

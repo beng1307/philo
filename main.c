@@ -5,8 +5,12 @@ static void	*philos_life(void *philo)
 	t_philo	*curr_philo;
 	
 	curr_philo = (t_philo *)philo;
-	curr_philo->last_meal_time = timestamp_in_ms();	
+	pthread_mutex_lock(curr_philo->last_meal_time_mutex);
+	curr_philo->last_meal_time = timestamp_in_ms();
+	pthread_mutex_unlock(curr_philo->last_meal_time_mutex);	
 
+	if (curr_philo->id % 2)
+		usleep(10 * 1000);
 	while (1)
 	{
 		take_fork(curr_philo);
@@ -30,17 +34,13 @@ static void	philo_while_loop(t_data **data)
 		(*data)->philo = (*data)->philo->next;
 		index++;		
 	}
+	usleep(1);
 	while (1)
 	{
 		if (!all_alive(data))
 			break ;
 	}
 }
-
-// static void	single_philo_loop(t_data **data)
-// {
-
-// }
 
 int	main(int ac, char **av)
 {
@@ -55,7 +55,7 @@ int	main(int ac, char **av)
 		return (error_message("Input not valid!"), 1);
 	if (data->number_of_philos > 1)
 		philo_while_loop(&data);
-	// else
-	// 	single_philo_loop();
+	else
+		single_philo(&data);
 	clean_up(&data);
 }

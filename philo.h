@@ -97,10 +97,12 @@ bool	all_alive(t_data **data);
 int		parse_and_init_philo(t_data **data, char **av);
 
 
-
 // Clean up
 void	clean_up(t_data **data);
 void    free_philos(t_philo **philo);
 
+
+//Logic
+void	single_philo(t_data **data);
 
 #endif
