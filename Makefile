@@ -1,5 +1,5 @@
 CC = cc
-CFLAGS = -g -Wall -Werror -Wextra -pthread -fsanitize=thread
+CFLAGS = -g -Wall -Werror -Wextra -pthread
 
 data = philo
 

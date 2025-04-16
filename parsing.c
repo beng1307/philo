@@ -30,9 +30,12 @@ static int number_validation(t_data **data)
 		return (1);
 	if ((*data)->time_to_sleep < 1)
 		return (1);
-	if ((*data)->times_phils_have_to_eat < 1)
-		return (1);
-	
+	if ((*data)->fifth_argument_exists)
+	{
+		if ((*data)->times_phils_have_to_eat < 1)
+			return (1);
+	}
+
 	return (0);
 }
 
@@ -55,6 +58,7 @@ static void	inform_philos(t_data **data)
 		curr_philo->times_phils_have_to_eat = &(*data)->times_phils_have_to_eat;
 		curr_philo->starting_time = &(*data)->starting_time;
 		curr_philo->philo_dead = &(*data)->philo_dead;
+		curr_philo->fifth_argument_exists = &(*data)->fifth_argument_exists;
 
 		curr_philo = curr_philo->next;
 		index++;
@@ -62,19 +66,26 @@ static void	inform_philos(t_data **data)
 }
 
 
-int	parse_and_init_philo(t_data **data, char **av)
+int	parse_and_init_philo(t_data **data, char **av, int ac)
 {
 	(*data)->number_of_philos = philo_atoi(av[1]);
 	(*data)->time_to_die = philo_atoi(av[2]);
 	(*data)->time_to_eat = philo_atoi(av[3]);
 	(*data)->time_to_sleep = philo_atoi(av[4]);
-	(*data)->times_phils_have_to_eat = philo_atoi(av[4]);
 	(*data)->philo_dead = false;
 	(*data)->dinning_started = false;
 
 	(*data)->print_mutex_exists = false;
 	(*data)->philo_dead_mutex_exists = false;
 	(*data)->last_meal_time_mutex_exists = false;
+
+	if (ac == 5)
+		(*data)->fifth_argument_exists = false;
+	else if (ac == 6)
+	{
+		(*data)->fifth_argument_exists = true;		
+		(*data)->times_phils_have_to_eat = philo_atoi(av[5]);
+	}
 
 	if (pthread_mutex_init(&(*data)->print_mutex, NULL) != 0)
 		return (clean_up(data), 1);

@@ -10,6 +10,7 @@ t_philo *ft_newphilo(int id)
 	if (pthread_mutex_init(&new_philo->fork, NULL) != 0)
 		return (save_free((void **)new_philo), NULL);
     new_philo->id = id;
+	new_philo->meal_counter = 0;
     new_philo->next = NULL;
 	new_philo->prev = NULL;
 

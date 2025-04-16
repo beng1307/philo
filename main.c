@@ -15,6 +15,14 @@ static void	*philos_life(void *philo)
 	{
 		take_fork(curr_philo);
 		eating(curr_philo);
+		curr_philo->meal_counter++;
+		// printf("%zu\n", curr_philo->meal_counter);
+		// printf("times he has to eat %zu\n", *curr_philo->times_phils_have_to_eat);
+		if (*curr_philo->fifth_argument_exists)
+		{
+			if (curr_philo->meal_counter >= *curr_philo->times_phils_have_to_eat)
+				return (NULL);
+		}
 		sleeping(curr_philo);
 		thinking(curr_philo);
 		pthread_mutex_lock(curr_philo->philo_dead_mutex);
@@ -55,7 +63,7 @@ int	main(int ac, char **av)
 		return (error_message("Allocation of data failed!"), 1);
 	if (wrong_input(ac, &av[1]))
 		return (free(data), error_message("Put only numbers!"), 1);
-	if (parse_and_init_philo(&data, av) == 1)
+	if (parse_and_init_philo(&data, av, ac) == 1)
 		return (error_message("Input not valid!"), 1);
 	if (data->number_of_philos > 1)
 		philo_while_loop(&data);

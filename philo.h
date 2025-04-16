@@ -19,6 +19,7 @@ typedef struct	s_philo
 
 	pthread_mutex_t	fork;
 	size_t			last_meal_time;
+	size_t			meal_counter;
 
 	struct s_philo	*prev;
 	struct s_philo	*next;
@@ -34,6 +35,7 @@ typedef struct	s_philo
 	size_t			*times_phils_have_to_eat;
 	size_t			*starting_time;
 	bool			*philo_dead;
+	bool			*fifth_argument_exists;
 
 
 }					t_philo;
@@ -58,6 +60,7 @@ typedef struct	s_data
 
 	bool			philo_dead;
 	bool			dinning_started;
+	bool			fifth_argument_exists;
 }					t_data;
 
 
@@ -94,7 +97,7 @@ bool	all_alive(t_data **data);
 
 
 // Parsing
-int		parse_and_init_philo(t_data **data, char **av);
+int		parse_and_init_philo(t_data **data, char **av, int ac);
 
 
 // Clean up
