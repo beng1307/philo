@@ -10,13 +10,20 @@ static void	*philos_life(void *philo)
 	pthread_mutex_unlock(curr_philo->last_meal_time_mutex);	
 
 	if (curr_philo->id % 2)
-		usleep(10 * 1000);
+		my_usleep(1);
 	while (1)
 	{
 		take_fork(curr_philo);
 		eating(curr_philo);
 		sleeping(curr_philo);
 		thinking(curr_philo);
+		pthread_mutex_lock(curr_philo->philo_dead_mutex);
+		if (*curr_philo->philo_dead)
+		{
+			pthread_mutex_unlock(curr_philo->philo_dead_mutex);
+			break ;
+		}
+		pthread_mutex_unlock(curr_philo->philo_dead_mutex);
 	}
 	return (NULL);
 }
@@ -31,15 +38,12 @@ static void	philo_while_loop(t_data **data)
 	while (index < (*data)->number_of_philos)
 	{
 		pthread_create(&(*data)->philo->philosopher, NULL, philos_life, (void *)(*data)->philo);
+		my_usleep(1);
 		(*data)->philo = (*data)->philo->next;
 		index++;		
 	}
-	usleep(1);
-	while (1)
-	{
-		if (!all_alive(data))
-			break ;
-	}
+	if (!all_alive(data))
+		return ;
 }
 
 int	main(int ac, char **av)

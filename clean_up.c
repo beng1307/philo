@@ -12,16 +12,22 @@ void	save_free(void **to_free)
 void    free_philos(t_philo **philo)
 {
     t_philo *philo_to_free;
+	size_t	index;
+	size_t	number_of_philos;
 
-    if (!philo || !*philo)
-        return ;
-    while (*philo)
-    {
-        philo_to_free = *philo;
-        *philo = (*philo)->next;
+	if (!philo || !*philo)
+		return;
 
-        pthread_mutex_destroy(&philo_to_free->fork);
-        save_free((void **)philo_to_free);
+	index = 0;
+	number_of_philos = *(*philo)->number_of_philos;
+	while (index < number_of_philos)
+	{
+		philo_to_free = (*philo)->next;
+		pthread_mutex_destroy(&(*philo)->fork);
+        save_free((void **)philo);
+		*philo = philo_to_free;
+		
+		index++;
     }
 }
 

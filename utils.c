@@ -77,3 +77,12 @@ void	safe_printf(t_philo *philo, char *str)
 		printf("%zu %d %s\n", timestamp_in_ms() - *philo->starting_time, philo->id, str);
  	pthread_mutex_unlock(philo->print_mutex);
 }
+
+void	my_usleep(size_t milliseconds)
+{
+	size_t	start;
+
+	start = timestamp_in_ms();
+	while ((timestamp_in_ms() - start) < milliseconds)
+		usleep(500);
+}

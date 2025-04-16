@@ -2,12 +2,16 @@
 
 void	thinking(t_philo *philo)
 {
+	int	thinking_time;
+	
 	pthread_mutex_lock(philo->philo_dead_mutex);
 	if (!*philo->philo_dead)
 		safe_printf(philo, "is thinking");
 	pthread_mutex_unlock(philo->philo_dead_mutex);
-	
-	usleep(1 * 1000);
+
+	thinking_time = (*philo->time_to_die - *philo->time_to_eat - *philo->time_to_sleep) / 2;
+	if (thinking_time > 0)
+		my_usleep(thinking_time);
 }
 
 void	take_fork(t_philo *philo)
@@ -39,7 +43,7 @@ void	eating(t_philo *philo)
 	philo->last_meal_time = timestamp_in_ms();
 	pthread_mutex_unlock(philo->last_meal_time_mutex);
 
-	usleep(*philo->time_to_eat * 1000);
+	my_usleep(*philo->time_to_eat);
 
 	if ((size_t)philo->id % 2)
 	{
@@ -60,7 +64,7 @@ void	sleeping(t_philo *philo)
 		safe_printf(philo, "is sleeping");
 	pthread_mutex_unlock(philo->philo_dead_mutex);
 
-	usleep(*philo->time_to_sleep * 1000);
+	my_usleep(*philo->time_to_sleep);
 }
 
 void	died(t_philo *philo)
@@ -79,11 +83,11 @@ bool	all_alive(t_data **data)
 
 	philos = (*data)->philo;
 	index = 0;
-	while (index < (*data)->number_of_philos)
+	while (1)
 	{
 		pthread_mutex_lock(&(*data)->last_meal_time_mutex);
 		hunger_time = timestamp_in_ms() - philos->last_meal_time;
-		printf("hunger_time: %zu\n", hunger_time);
+		// printf("hunger_time: %zu\n", hunger_time);
 		if (hunger_time > (*data)->time_to_die)
 			return (pthread_mutex_unlock(&(*data)->last_meal_time_mutex), died(philos), false);
 		pthread_mutex_unlock(&(*data)->last_meal_time_mutex);

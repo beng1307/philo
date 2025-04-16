@@ -105,4 +105,6 @@ void    free_philos(t_philo **philo);
 //Logic
 void	single_philo(t_data **data);
 
+void	my_usleep(size_t milliseconds);
+
 #endif
