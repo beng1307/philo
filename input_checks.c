@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_checks.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/17 16:34:02 by bgretic           #+#    #+#             */
+/*   Updated: 2025/04/17 20:32:06 by bgretic          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 int	an_arg_is_not_correct(char **av)
@@ -15,16 +27,7 @@ int	an_arg_is_not_correct(char **av)
 				return (1);
 			index2++;
 		}
-		index1++;	
+		index1++;
 	}
-	return (0);
-}
-
-int	wrong_input(int ac, char **av)
-{
-	if (!(ac == 5 || ac == 6))
-		return (1);
-	if (an_arg_is_not_correct(av))
-		return (1);
 	return (0);
 }

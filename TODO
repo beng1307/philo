@@ -1,9 +1,12 @@
-//Usleep take microseconds and u have the time in milliseconds
+TODO:
 
-//Check if there is a number of times philos have to eat
+-Bring everything into norm
 
-//Do a proper cleanup/exit function
+-Check for memory leaks and Dataraces
 
-//Maybe put a usleep somewhere in philo_while_loop
-//so it doesn't change the philo before the philo
-//is set in philo_life
+-Change the Makefile
+
+-Make comments for readability
+
+-pick up 2 forks
+
