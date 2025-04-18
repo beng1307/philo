@@ -6,7 +6,7 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 18:30:12 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/17 18:37:19 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/18 15:21:46 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 static void	check_if_philo_is_full(t_philo *curr_philo)
 {
 	curr_philo->meal_counter++;
+	pthread_mutex_lock(curr_philo->dead_or_full_mutex);
 	if (*curr_philo->fifth_argument_exists)
 	{
 		if (curr_philo->meal_counter >= *curr_philo->times_phils_have_to_eat)
 			curr_philo->done_eating = true;
 	}
+	pthread_mutex_unlock(curr_philo->dead_or_full_mutex);
 }
 
 static void	*philos_life(void *philo)
@@ -31,7 +33,7 @@ static void	*philos_life(void *philo)
 	curr_philo->last_meal_time = timestamp_in_ms();
 	pthread_mutex_unlock(curr_philo->last_meal_time_mutex);
 	if (curr_philo->id % 2)
-		my_usleep(1);
+		my_usleep(1, curr_philo);
 	while (1)
 	{
 		take_fork(curr_philo);
@@ -61,7 +63,7 @@ void	philo_while_loop(t_data **data)
 	{
 		pthread_create(&(*data)->philo->philosopher, NULL, philos_life,
 			(void *)(*data)->philo);
-		my_usleep(1);
+		my_usleep(1, (*data)->philo);
 		(*data)->philo = (*data)->philo->next;
 		index++;
 	}

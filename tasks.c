@@ -6,7 +6,7 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:34:38 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/17 19:02:33 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/18 16:06:31 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	thinking(t_philo *philo)
 	if (thinking_time > 200)
 		thinking_time = 200;
 	if (thinking_time > 0)
-		my_usleep(thinking_time);
+		my_usleep(thinking_time, philo);
 }
 
 void	take_fork(t_philo *philo)
@@ -42,7 +42,10 @@ void	take_fork(t_philo *philo)
 	}
 	pthread_mutex_lock(philo->dead_or_full_mutex);
 	if (!*philo->philo_dead && !philo->done_eating)
+	{
 		safe_printf(philo, "has taken fork");
+		safe_printf(philo, "has taken fork");
+	}
 	pthread_mutex_unlock(philo->dead_or_full_mutex);
 }
 
@@ -55,7 +58,7 @@ void	eating(t_philo *philo)
 	pthread_mutex_lock(philo->last_meal_time_mutex);
 	philo->last_meal_time = timestamp_in_ms();
 	pthread_mutex_unlock(philo->last_meal_time_mutex);
-	my_usleep(*philo->time_to_eat);
+	my_usleep(*philo->time_to_eat, philo);
 	if ((size_t)philo->id % 2)
 	{
 		pthread_mutex_unlock(&philo->fork);
@@ -74,7 +77,7 @@ void	sleeping(t_philo *philo)
 	if (!*philo->philo_dead && !philo->done_eating)
 		safe_printf(philo, "is sleeping");
 	pthread_mutex_unlock(philo->dead_or_full_mutex);
-	my_usleep(*philo->time_to_sleep);
+	my_usleep(*philo->time_to_sleep, philo);
 }
 
 void	died(t_philo *philo)

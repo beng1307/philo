@@ -6,7 +6,7 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:33:47 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/17 17:25:59 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/18 13:51:11 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,15 @@ void	join_threads(t_data **data)
 	}
 }
 
-void	free_philos(t_philo **philo)
+void	free_philos(t_philo **philo, size_t number_of_philos)
 {
 	t_philo	*philo_to_free;
 	size_t	index;
-	size_t	number_of_philos;
 
 	if (!philo || !*philo)
 		return ;
 	index = 0;
-	number_of_philos = *(*philo)->number_of_philos;
-	while (index < number_of_philos)
+	while (index < number_of_philos && (philo_to_free || *philo))
 	{
 		philo_to_free = (*philo)->next;
 		pthread_mutex_destroy(&(*philo)->fork);
@@ -69,6 +67,6 @@ void	clean_up(t_data **data)
 {
 	if ((*data)->dinning_started)
 		join_threads(data);
-	free_philos(&(*data)->philo);
+	free_philos(&(*data)->philo, (*data)->number_of_philos);
 	destroy_data(data);
 }

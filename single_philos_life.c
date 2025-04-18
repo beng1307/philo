@@ -6,7 +6,7 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:34:34 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/17 20:24:53 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/18 14:38:17 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	*single_philos_life(void *philo)
 	curr_philo = (t_philo *)philo;
 	pthread_mutex_lock(&curr_philo->fork);
 	safe_printf(curr_philo, "has taken fork");
-	my_usleep(*curr_philo->time_to_die);
+	my_usleep(*curr_philo->time_to_die, curr_philo);
 	safe_printf(curr_philo, "died");
 	pthread_mutex_unlock(&curr_philo->fork);
 	return (NULL);

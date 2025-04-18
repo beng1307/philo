@@ -6,7 +6,7 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:34:05 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/17 20:01:57 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/18 13:52:54 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_philo	*create_philos(size_t number_of_philos)
 	while (index < number_of_philos)
 	{
 		if (philo_add_back(&list_of_philos, ft_newphilo(index + 1)) == 1)
-			return (free_philos(&list_of_philos), NULL);
+			return (free_philos(&list_of_philos, number_of_philos), NULL);
 		index++;
 	}
 	last_philo = ft_last_philo(list_of_philos);

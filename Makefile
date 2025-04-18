@@ -6,12 +6,12 @@
 #    By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 16:34:18 by bgretic           #+#    #+#              #
-#    Updated: 2025/04/17 20:12:11 by bgretic          ###   ########.fr        #
+#    Updated: 2025/04/18 15:28:34 by bgretic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -g -Wall -Werror -Wextra
+CFLAGS = -g -Wall -Werror -Wextra -pthread
 
 NAME = philo
 HEADER = philo.h
