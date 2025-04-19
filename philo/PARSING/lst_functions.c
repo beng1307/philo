@@ -6,11 +6,11 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:34:05 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/18 13:52:54 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/19 16:26:05 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 t_philo	*ft_last_philo(t_philo *philo)
 {

@@ -6,30 +6,39 @@
 #    By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/17 16:34:18 by bgretic           #+#    #+#              #
-#    Updated: 2025/04/18 15:28:34 by bgretic          ###   ########.fr        #
+#    Updated: 2025/04/19 16:25:34 by bgretic          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
-CFLAGS = -g -Wall -Werror -Wextra -pthread
+CFLAGS = -Wall -Werror -Wextra -pthread
 
 NAME = philo
 HEADER = philo.h
 
-SRC_DIR = src
 OBJ_DIR = obj
 
-SRCS = input_checks.c clean_up.c monitor.c \
-       lst_functions.c main.c parsing_1.c parsing_2.c \
-       utils_1.c utils_2.c tasks.c \
-	   single_philos_life.c multiple_philos_life.c
+SRCS = main.c \
+	   MONITOR/monitor.c \
+	   PARSING/input_checks.c \
+	   PARSING/lst_functions.c \
+	   PARSING/parsing_1.c \
+	   PARSING/parsing_2.c \
+	   PHILO_LIFE/multiple_philos_life.c \
+	   PHILO_LIFE/single_philos_life.c \
+	   PHILO_LIFE/tasks.c \
+	   UTILS/clean_up.c \
+	   UTILS/utils_1.c \
+	   UTILS/utils_2.c \
+	   UTILS/utils_3.c
+
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: %.c $(HEADER)
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 all: $(NAME)

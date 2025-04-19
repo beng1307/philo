@@ -6,7 +6,7 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:34:13 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/17 20:49:03 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/19 16:15:25 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	main(int ac, char **av)
 		return (error_message("Allocation of data failed!"), 1);
 	if (parse_and_init_philo(&data, av, ac) == 1)
 		return (1);
-	if (data->number_of_philos > 1)
-		philo_while_loop(&data);
-	else
+	if (data->number_of_philos == 1)
 		single_philo(&data);
+	else
+		multiple_philos(&data);
 	clean_up(&data);
 }

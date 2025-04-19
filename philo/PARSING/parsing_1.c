@@ -6,11 +6,11 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:34:23 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/17 20:46:45 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/19 16:26:10 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 int	parse_and_init_philo(t_data **data, char **av, int ac)
 {

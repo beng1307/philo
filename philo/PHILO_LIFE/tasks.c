@@ -6,39 +6,56 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:34:38 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/18 16:06:31 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/19 19:21:23 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
+
+// voidthinking(t_philo *philo)
+// {
+// 	int	thinking_time;
+
+// 	pthread_mutex_lock(philo->dead_or_full_mutex);
+// 	if (!*philo->philo_dead && !philo->done_eating)
+// 		safe_printf(philo, "is thinking");
+// 	pthread_mutex_unlock(philo->dead_or_full_mutex);
+// 	if (philo->id % 2)
+// 	{
+// 		thinking_time = (*philo->time_to_die - *philo->time_to_eat
+// 				- *philo->time_to_sleep) / 2;
+// 		if (thinking_time < 1)
+// 			thinking_time = 1;
+// 		my_usleep(thinking_time, philo);
+// 	}
+// }
 
 void	thinking(t_philo *philo)
 {
-	int	thinking_time;
+	size_t	delay;
 
 	pthread_mutex_lock(philo->dead_or_full_mutex);
 	if (!*philo->philo_dead && !philo->done_eating)
 		safe_printf(philo, "is thinking");
 	pthread_mutex_unlock(philo->dead_or_full_mutex);
-	thinking_time = (*philo->time_to_die - *philo->time_to_eat
+	delay = (*philo->time_to_die - *philo->time_to_eat
 			- *philo->time_to_sleep) / 2;
-	if (thinking_time > 200)
-		thinking_time = 200;
-	if (thinking_time > 0)
-		my_usleep(thinking_time, philo);
+	if (delay < 1)
+		delay = 1;
+	my_usleep(delay, philo);
 }
 
 void	take_fork(t_philo *philo)
 {
-	if ((size_t)philo->id % 2)
+	if (philo->id % 2 == 0)
 	{
-		pthread_mutex_lock(&philo->next->fork);
 		pthread_mutex_lock(&philo->fork);
+		pthread_mutex_lock(&philo->next->fork);
 	}
 	else
 	{
-		pthread_mutex_lock(&philo->fork);
 		pthread_mutex_lock(&philo->next->fork);
+		pthread_mutex_lock(&philo->fork);
 	}
 	pthread_mutex_lock(philo->dead_or_full_mutex);
 	if (!*philo->philo_dead && !philo->done_eating)

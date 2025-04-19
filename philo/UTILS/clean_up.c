@@ -6,11 +6,11 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:33:47 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/18 13:51:11 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/19 16:26:24 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 void	save_free(void **to_free)
 {
@@ -42,6 +42,7 @@ void	free_philos(t_philo **philo, size_t number_of_philos)
 	if (!philo || !*philo)
 		return ;
 	index = 0;
+	philo_to_free = NULL;
 	while (index < number_of_philos && (philo_to_free || *philo))
 	{
 		philo_to_free = (*philo)->next;

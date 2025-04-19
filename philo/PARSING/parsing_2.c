@@ -6,11 +6,11 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 20:09:45 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/18 14:00:36 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/19 16:26:13 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 int	number_validation(t_data **data)
 {

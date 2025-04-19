@@ -6,11 +6,11 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:12:57 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/18 15:25:32 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/19 16:26:36 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 static bool	philos_still_alive(t_data **data,
 		t_philo *curr_philo, size_t *hunger_time)
@@ -56,6 +56,8 @@ static bool	philos_still_hungry(t_data **data,
 	return (true);
 }
 
+//Monitors the wellbeing of the philos
+/* monitor.c */
 int	monitor(t_data **data)
 {
 	t_philo	*philos;
@@ -75,6 +77,7 @@ int	monitor(t_data **data)
 		if (!philos_still_hungry(data, &index, &full_philos))
 			return (1);
 		philos = philos->next;
+		usleep(1000);
 	}
 	return (0);
 }

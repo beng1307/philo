@@ -6,17 +6,11 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:04:17 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/18 14:53:11 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/19 16:26:29 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
-
-void	error_message(char *message)
-{
-	write(2, message, ft_strlen(message));
-	write(2, "\n", 1);
-}
+#include "../philo.h"
 
 size_t	timestamp_in_ms(void)
 {
@@ -24,14 +18,6 @@ size_t	timestamp_in_ms(void)
 
 	gettimeofday(&curr_time, NULL);
 	return ((curr_time.tv_sec * 1000) + (curr_time.tv_usec / 1000));
-}
-
-void	safe_printf(t_philo *philo, char *str)
-{
-	pthread_mutex_lock(philo->print_mutex);
-	printf("%zu %d %s\n", timestamp_in_ms() - *philo->starting_time, philo->id,
-		str);
-	pthread_mutex_unlock(philo->print_mutex);
 }
 
 void	my_usleep(size_t time_in_ms, t_philo *philo)
@@ -50,4 +36,21 @@ void	my_usleep(size_t time_in_ms, t_philo *philo)
 		}
 		pthread_mutex_unlock(philo->dead_or_full_mutex);
 	}
+}
+
+size_t	timestamp_in_us(void)
+{
+	struct timeval	curr_time;
+
+	gettimeofday(&curr_time, NULL);
+	return (curr_time.tv_sec * 1000000UL + curr_time.tv_usec);
+}
+
+void	my_another_usleep(size_t time_in_us)
+{
+	size_t	curr_timestamp;
+
+	curr_timestamp = timestamp_in_us();
+	while ((timestamp_in_us() - curr_timestamp) < time_in_us)
+		usleep(50);
 }

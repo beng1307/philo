@@ -6,7 +6,7 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:40:44 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/18 14:36:41 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/19 16:15:44 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ size_t				timestamp_in_ms(void);
 bool				is_not_a_digit(char character);
 void				safe_printf(t_philo *philo, char *str);
 void				my_usleep(size_t milliseconds, t_philo *philo);
+void				my_another_usleep(size_t time_in_us);
 
 // Error handling
 int					an_arg_is_not_correct(char **av);
@@ -117,6 +118,6 @@ void				free_philos(t_philo **philo, size_t number_of_philos);
 
 // Logic
 void				single_philo(t_data **data);
-void				philo_while_loop(t_data **data);
+void				multiple_philos(t_data **data);
 
 #endif

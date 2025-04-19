@@ -6,11 +6,11 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 16:34:47 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/17 20:50:19 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/19 16:26:26 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../philo.h"
 
 void	ft_bzero(void *s, size_t n)
 {
