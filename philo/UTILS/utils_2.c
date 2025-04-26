@@ -6,7 +6,7 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:04:17 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/19 16:26:29 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/26 14:31:19 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	my_usleep(size_t time_in_ms, t_philo *philo)
 	curr_timestamp = timestamp_in_ms();
 	while ((timestamp_in_ms() - curr_timestamp) < time_in_ms)
 	{
-		usleep(500);
+		usleep(50);
 		pthread_mutex_lock(philo->dead_or_full_mutex);
 		if (*philo->philo_dead)
 		{

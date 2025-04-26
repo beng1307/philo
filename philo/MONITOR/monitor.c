@@ -6,7 +6,7 @@
 /*   By: bgretic <bgretic@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/17 17:12:57 by bgretic           #+#    #+#             */
-/*   Updated: 2025/04/19 16:26:36 by bgretic          ###   ########.fr       */
+/*   Updated: 2025/04/26 13:55:00 by bgretic          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ static bool	philos_still_hungry(t_data **data,
 		(*data)->all_done_eating = true;
 		return (pthread_mutex_unlock(&(*data)->dead_or_full_mutex),
 			false);
-		printf("test 1\n");
 	}
 	else if (*index == (*data)->number_of_philos
 		&& *full_philos != (*data)->number_of_philos)
@@ -57,7 +56,6 @@ static bool	philos_still_hungry(t_data **data,
 }
 
 //Monitors the wellbeing of the philos
-/* monitor.c */
 int	monitor(t_data **data)
 {
 	t_philo	*philos;
